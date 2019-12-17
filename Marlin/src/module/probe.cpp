@@ -113,10 +113,10 @@ xyz_pos_t probe_offset; // Initialized by settings.load()
 
   // Move to the magnet to unlock the probe
   void run_deploy_moves_script() {
-    #if TOUCH_MI_DEPLOY_XPOS > X_MAX_BED
+    #if ((TOUCH_MI_DEPLOY_XPOS > X_MAX_BED) || (TOUCH_MI_DEPLOY_XPOS < X_MIN_BED))
       TemporaryGlobalEndstopsState unlock_x(false);
     #endif
-    #if TOUCH_MI_DEPLOY_YPOS > Y_MAX_BED
+    #if ((TOUCH_MI_DEPLOY_YPOS > Y_MAX_BED) || (TOUCH_MI_DEPLOY_YPOS < Y_MIN_BED))
       TemporaryGlobalEndstopsState unlock_y(false);
     #endif
 

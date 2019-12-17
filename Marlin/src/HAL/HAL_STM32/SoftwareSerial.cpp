@@ -34,10 +34,8 @@
 //
 // Includes
 //
-#if defined(ARDUINO_ARCH_STM32) && !defined(STM32GENERIC)
-
 #include "SoftwareSerial.h"
-#include "timers.h"
+#include <timer.h>
 
 #define OVERSAMPLE 3 // in RX, Timer will generate interruption OVERSAMPLE time during a bit. Thus OVERSAMPLE ticks in a bit. (interrupt not synchonized with edge).
 
@@ -391,5 +389,3 @@ int SoftwareSerial::peek() {
   // Read from "head"
   return _receive_buffer[_receive_buffer_head];
 }
-
-#endif // ARDUINO_ARCH_STM32 && !STM32GENERIC

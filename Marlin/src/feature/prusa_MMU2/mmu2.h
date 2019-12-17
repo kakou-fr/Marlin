@@ -48,6 +48,7 @@ public:
   static void tool_change(const char* special);
   static uint8_t get_current_tool();
   static void set_filament_type(uint8_t index, uint8_t type);
+  static bool force_eject_filament();
 
   #if HAS_LCD_MENU && ENABLED(MMU2_MENUS)
     static bool unload();
@@ -72,6 +73,9 @@ private:
   static bool get_response();
   static void manage_response(const bool move_axes, const bool turn_off_nozzle);
 
+  static void load_to_nozzle_start_C0();
+  static void load_to_nozzle_after_C0();
+
   #if HAS_LCD_MENU && ENABLED(MMU2_MENUS)
     static void load_to_nozzle();
     static void filament_ramming();
@@ -87,7 +91,8 @@ private:
   static volatile bool finda_runout_valid;
   static int16_t version, buildnr;
   static millis_t last_request, next_P0_request;
-  static char rx_buffer[MMU_RX_SIZE], tx_buffer[MMU_TX_SIZE];
+  static char rx_buffer[2048], tx_buffer[2048];
+  static int8_t nb_c0_try;
 
   static inline void set_runout_valid(const bool valid) {
     finda_runout_valid = valid;
